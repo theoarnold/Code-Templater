@@ -2,7 +2,7 @@ Allows you to insert values into your own custom templates, helping to decrease 
 
 ![6368ab18a81d07d827480e559e2f4877](https://github.com/theoarnold/Code-Templater/assets/15271435/387f9126-0159-4a96-b166-8f048eaa0336)
 
-For example, this template:
+For example, if you take this template:
 ```
 public class [rep1]()
 {
@@ -14,7 +14,7 @@ And input these values:
 ```
 (ExampleClass), test1, test2, test3, test4, test5, test6, test7, test8, test9
 ```
-It Becomes this:
+You get Becomes this result:
 ```
 public class ExampleClass()
 {
