@@ -6,7 +6,7 @@ For example, this template:
 ```
 public class [rep1]()
 {
-<repList>//Your comment for [repFU]. </summary>
+<repList>//Your comment for [repFU].
 string [repFU]Value = "[repFL]";</repList>
 }
 ```
