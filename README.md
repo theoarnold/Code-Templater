@@ -16,7 +16,7 @@ And input these values:
 ```
 It Becomes this:
 ```
-public class ExampleClass
+public class ExampleClass()
 {
 //Your comment for Test1. 
 string Test1Value = "test1";
