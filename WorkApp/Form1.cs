@@ -19,9 +19,12 @@ namespace WorkApp
             string text = textBox1.Text;
             string template = textBox2.Text;
             string[] res = text.Split(',');
-            string s = string.Join(" ", res);
 
-            Run.StartAutomate(res, template);
+            AutomationManager automationManager = new AutomationManager(res, template);
+            string result = automationManager.StartAutomate();
+
+            CompletedResult completedResult = new CompletedResult();
+            completedResult.Show(result);
         }
 
         private void button3_Click_1(object sender, EventArgs e)
