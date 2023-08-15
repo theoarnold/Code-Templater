@@ -4,7 +4,7 @@ Allows you to insert values into your own custom templates, helping to decrease 
 
 For example, if you take this template:
 ```
-public class [rep1]()
+public void [rep1]()
 {
 <repList>//Your comment for [repFU].
 string [repFU]Value = "[repFL]";</repList>
@@ -12,11 +12,11 @@ string [repFU]Value = "[repFL]";</repList>
 ```
 And input these values:
 ```
-*(ExampleClass), test1, test2, test3, test4, test5, test6, test7, test8, test9
+*(ExampleMethod), test1, test2, test3, test4, test5, test6, test7, test8, test9
 ```
 You get Becomes this result:
 ```
-public class ExampleClass()
+public void ExampleMethod()
 {
 //Your comment for Test1. 
 string Test1Value = "test1";
