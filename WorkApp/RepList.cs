@@ -6,7 +6,7 @@ namespace WorkApp
     {
         private const string StartTag = "<repList>";
         private const string EndTag = "</repList>";
-        public string Replace(string template, string[] values)
+        internal string Replace(string template, string[] values)
         {
 
             int startIndex = template.IndexOf(StartTag);

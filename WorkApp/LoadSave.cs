@@ -3,7 +3,7 @@ namespace WorkApp
 {
     internal static class LoadSave
     {
-        public static void SaveContent(string content)
+        internal static void SaveContent(string content)
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.Filter = "Text Files (*.txt)|*.txt|All Files (*.*)|*.*";
@@ -18,7 +18,7 @@ namespace WorkApp
             }
         }
 
-        public static void LoadContent(TextBox textBox)
+        internal static void LoadContent(TextBox textBox)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "Text Files (*.txt)|*.txt|All Files (*.*)|*.*";

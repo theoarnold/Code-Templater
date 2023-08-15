@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Text;
 
 namespace WorkApp
 {
     internal class RepTags
     {
-        public string Replace(string template, string? value = null)
+        internal string Replace(string template, string? value = null)
         {
             StringBuilder sb = new StringBuilder(template);
 

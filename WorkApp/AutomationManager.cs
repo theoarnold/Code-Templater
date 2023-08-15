@@ -13,7 +13,7 @@
         public string StartAutomate()
         {
             RepList repList = new RepList();
-            RemainingReplatements remainingReplatements = new RemainingReplatements();
+            RemainingReplacements remainingReplatements = new RemainingReplacements();
             RepSelections repSelections = new RepSelections();
 
             string modifiedTemplate = repList.Replace(template, values);

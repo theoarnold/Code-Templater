@@ -3,11 +3,11 @@ using System.Text.RegularExpressions;
 
 namespace WorkApp
 {
-    internal class RemainingReplatements
+    internal class RemainingReplacements
     {
         private const string RepListValues = @"\[rep[^]]*\]";
 
-        public string ReadValues(string[] values, string modifiedTemplate)
+        internal string ReadValues(string[] values, string modifiedTemplate)
         {
             StringBuilder result = new StringBuilder();
             RepTags repTags = new RepTags();

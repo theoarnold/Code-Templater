@@ -7,7 +7,7 @@ namespace WorkApp
     {
         private const string RepListValues = @"\[rep[^]]*\]";
 
-        public string Replace(string template, string[] values)
+        internal string Replace(string template, string[] values)
         {
             StringBuilder sb = new StringBuilder(template);
 
