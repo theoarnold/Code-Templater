@@ -1,6 +1,6 @@
 Allows you to insert values into your own custom templates, helping to decrease time spent on boilerplate code that is present across a number of classes.
 
-![6368ab18a81d07d827480e559e2f4877](https://github.com/theoarnold/Code-Templater/assets/15271435/387f9126-0159-4a96-b166-8f048eaa0336)
+![245912240-387f9126-0159-4a96-b166-8f048eaa0336](https://github.com/theoarnold/Code-Templater/assets/15271435/ee2e1542-daaa-4167-b4c3-20e52e2a1712)
 
 For example, if you take this template:
 ```
@@ -12,7 +12,7 @@ string [repFU]Value = "[repFL]";</repList>
 ```
 And input these values:
 ```
-(ExampleClass), test1, test2, test3, test4, test5, test6, test7, test8, test9
+*(ExampleClass), test1, test2, test3, test4, test5, test6, test7, test8, test9
 ```
 You get Becomes this result:
 ```
