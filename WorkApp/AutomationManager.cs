@@ -10,7 +10,7 @@
             this.template = template;
         }
 
-        public string StartAutomate()
+        internal string StartAutomate()
         {
             RepList repList = new RepList();
             RemainingReplacements remainingReplatements = new RemainingReplacements();
