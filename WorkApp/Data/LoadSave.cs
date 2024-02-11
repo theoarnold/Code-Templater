@@ -1,5 +1,4 @@
-﻿
-namespace WorkApp
+﻿namespace WorkApp.Data
 {
     internal static class LoadSave
     {

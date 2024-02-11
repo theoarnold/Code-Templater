@@ -1,9 +1,6 @@
-using System;
-using System.IO;
-using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using WorkApp.Data;
 
-namespace WorkApp
+namespace WorkApp.Forms
 {
     public partial class Form1 : Form
     {

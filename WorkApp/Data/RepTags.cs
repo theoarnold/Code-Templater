@@ -1,10 +1,10 @@
 ﻿using System.Text;
 
-namespace WorkApp
+namespace WorkApp.Data
 {
-    internal class RepTags
+    internal static class RepTags
     {
-        internal string Replace(string template, string? value = null)
+        internal static string Replace(string template, string? value = null)
         {
             StringBuilder sb = new StringBuilder(template);
 
@@ -17,7 +17,7 @@ namespace WorkApp
                   .Replace("[repFU]", value.Substring(0, 1).ToUpper() + value.Substring(1));
             }
 
-           string replacedValue = sb.ToString();
+            string replacedValue = sb.ToString();
 
             return replacedValue;
         }

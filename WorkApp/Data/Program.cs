@@ -1,4 +1,6 @@
-namespace WorkApp
+using WorkApp.Forms;
+
+namespace WorkApp.Data
 {
     internal static class Program
     {
