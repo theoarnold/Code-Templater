@@ -11,7 +11,6 @@ namespace WorkApp.Data
 
         internal string RepList(string template, string[] values)
         {
-
             int startIndex = template.IndexOf(StartTag);
             int endIndex = template.IndexOf(EndTag);
 
@@ -64,6 +63,7 @@ namespace WorkApp.Data
 
             return replacedValue;
         }
+
         internal string RemainingReplacements(string[] values, string modifiedTemplate)
         {
             StringBuilder result = new StringBuilder();
