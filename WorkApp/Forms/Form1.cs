@@ -17,11 +17,12 @@ namespace WorkApp.Forms
             string template = textBox2.Text;
             string[] res = text.Split(',');
 
-            AutomationManager automationManager = new AutomationManager(res, template);
-            string result = automationManager.StartAutomate();
+            TemplateProcessor processor = new TemplateProcessor(res, template);
+            string result = processor.ProcessTemplate();
 
-            CompletedResult completedResult = new CompletedResult();
-            completedResult.Show(result);
+            Form2 form2 = new Form2();
+            form2.textBox1_DisplayResult(result);
+            form2.ShowDialog();
         }
 
         private void button3_Click_1(object sender, EventArgs e)

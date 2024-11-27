@@ -8,13 +8,13 @@ namespace WorkApp.Data
         {
             StringBuilder sb = new StringBuilder(template);
 
-            if (value != null)
+            if (!string.IsNullOrEmpty(value))
             {
                 sb.Replace("[rep]", value)
                   .Replace("[repL]", value.ToLower())
                   .Replace("[repU]", value.ToUpper())
-                  .Replace("[repFL]", value.Substring(0, 1).ToLower() + value.Substring(1))
-                  .Replace("[repFU]", value.Substring(0, 1).ToUpper() + value.Substring(1));
+                  .Replace("[repFL]", char.ToLower(value[0]) + value[1..])
+                  .Replace("[repFU]", char.ToUpper(value[0]) + value[1..]);
             }
 
             string replacedValue = sb.ToString();

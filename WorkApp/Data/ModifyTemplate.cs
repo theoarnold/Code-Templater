@@ -3,89 +3,96 @@ using System.Text.RegularExpressions;
 
 namespace WorkApp.Data
 {
-    internal class ModifyTemplate
+    public class TemplateProcessor
     {
         private const string StartTag = "<repList>";
         private const string EndTag = "</repList>";
         private const string RepListValues = @"\[rep[^]]*\]";
+        private readonly string[] values;
+        private readonly string template;
+        private readonly StringBuilder sb;
 
-        internal string RepList(string template, string[] values)
+        public TemplateProcessor(string[] values, string template)
         {
-            int startIndex = template.IndexOf(StartTag);
-            int endIndex = template.IndexOf(EndTag);
+            this.values = values ?? throw new ArgumentNullException(nameof(values));
+            this.template = template ?? throw new ArgumentNullException(nameof(template));
 
-            if (startIndex != -1 && endIndex != -1)
-            {
-                string substring = template.Substring(startIndex + StartTag.Length, endIndex - startIndex - StartTag.Length);
-                StringBuilder modifiedSubstring = new StringBuilder();
-
-                for (int i = 0; i < values.Length; i++)
-                {
-                    if (!values[i].Contains("*(") && !values[i].Contains(")"))
-                    {
-                        string replacedValue = RepTags.Replace(substring, values[i].TrimStart());
-                        modifiedSubstring.AppendLine(replacedValue);
-                    }
-                }
-
-                template = template.Remove(startIndex, endIndex + EndTag.Length - startIndex)
-                                   .Insert(startIndex, modifiedSubstring.ToString());
-            }
-
-            return template;
+            // Updated to create one stringbuilder, less readable but clearing the same stringbuilder and reusing is slightly faster.
+            sb = new StringBuilder(template.Length * 2); // Estimate initial capacity
         }
 
-        internal string RepSelections(string template, string[] values)
+        public string ProcessTemplate()
         {
-            StringBuilder sb = new StringBuilder(template);
-
-            if (Regex.IsMatch(template, RepListValues))
-            {
-                for (int i = 0; i < values.Length; i++)
-                {
-                    string replacementTag = $"[rep{i + 1}]";
-                    string lowerCaseTag = $"[rep{i + 1}L]";
-                    string upperCaseTag = $"[rep{i + 1}U]";
-                    string firstLowerTag = $"[rep{i + 1}FL]";
-                    string firstUpperTag = $"[rep{i + 1}FU]";
-
-                    string valueTrim = values[i].TrimStart().Replace("*(", "").Replace(")", "");
-
-                    sb.Replace(replacementTag, valueTrim)
-                       .Replace(lowerCaseTag, valueTrim.ToLower())
-                       .Replace(upperCaseTag, valueTrim.ToUpper())
-                       .Replace(firstLowerTag, valueTrim.Substring(0, 1).ToLower() + valueTrim.Substring(1))
-                       .Replace(firstUpperTag, valueTrim.Substring(0, 1).ToUpper() + valueTrim.Substring(1));
-                }
-            }
-
-            string replacedValue = sb.ToString();
-
-            return replacedValue;
+            string processedTemplate = template;
+            processedTemplate = ProcessRepList(processedTemplate);
+            processedTemplate = ProcessRepSelections(processedTemplate);
+            processedTemplate = ProcessRemainingReplacements(processedTemplate);
+            return processedTemplate;
         }
 
-        internal string RemainingReplacements(string[] values, string modifiedTemplate)
+        private string ProcessRepList(string input)
         {
-            StringBuilder result = new StringBuilder();
+            int startIndex = input.IndexOf(StartTag);
+            int endIndex = input.IndexOf(EndTag);
 
-            if (Regex.IsMatch(modifiedTemplate, RepListValues))
+            string substring = input.Substring(startIndex + StartTag.Length,
+                                            endIndex - startIndex - StartTag.Length);
+
+            sb.Clear();
+
+            foreach (string value in values.Where(v => !v.Contains("*(") && !v.Contains(")")))
             {
-                for (int i = 0; i < values.Length; i++)
+                string replacedValue = RepTags.Replace(substring, value.TrimStart());
+                sb.AppendLine(replacedValue);
+            }
+
+            return input.Remove(startIndex, endIndex + EndTag.Length - startIndex)
+                       .Insert(startIndex, sb.ToString());
+        }
+
+        private string ProcessRepSelections(string input)
+        {
+            if (!Regex.IsMatch(input, RepListValues))
+                return input;
+
+            sb.Clear().Append(input);
+
+            int index = 1;
+
+            foreach (string value in values)
+            {
+                string cleanValue = value.TrimStart().Replace("*(", "").Replace(")", "");
+
+                if (!string.IsNullOrEmpty(cleanValue))
                 {
-                    if (!values[i].Contains("*(") && !values[i].Contains(")"))
-                    {
-                        string replacedValue = RepTags.Replace(modifiedTemplate, values[i].TrimStart());
-                        result.AppendLine(replacedValue);
-                    }
+                   sb.Replace($"[rep{index}]", cleanValue)
+                     .Replace($"[rep{index}L]", cleanValue.ToLower())
+                     .Replace($"[rep{index}U]", cleanValue.ToUpper())
+                     .Replace($"[rep{index}FL]", char.ToLower(cleanValue[0]) + cleanValue[1..])
+                     .Replace($"[rep{index}FU]", char.ToUpper(cleanValue[0]) + cleanValue[1..]);
                 }
-            }
-            else
-            {
-                string replacedValue = RepTags.Replace(modifiedTemplate);
-                result.AppendLine(replacedValue);
+
+                index++;
             }
 
-            return result.ToString();
+            return sb.ToString();
+        }
+
+        private string ProcessRemainingReplacements(string input)
+        {
+            if (!Regex.IsMatch(input, RepListValues))
+            {
+                return RepTags.Replace(input);
+            }
+
+            sb.Clear();
+
+            foreach (string value in values.Where(v => !v.Contains("*(") && !v.Contains(")")))
+            {
+                string replacedValue = RepTags.Replace(input, value.TrimStart());
+                sb.AppendLine(replacedValue);
+            }
+            return sb.ToString();
         }
     }
 }
