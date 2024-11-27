@@ -1,8 +1,8 @@
 ﻿namespace WorkApp.Data
 {
-    internal static class LoadSave
+    public static class LoadSave
     {
-        internal static void SaveContent(string content)
+        public static void SaveContent(string content)
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.Filter = "Text Files (*.txt)|*.txt|All Files (*.*)|*.*";
@@ -17,7 +17,7 @@
             }
         }
 
-        internal static void LoadContent(TextBox textBox)
+        public static void LoadContent(TextBox textBox)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "Text Files (*.txt)|*.txt|All Files (*.*)|*.*";

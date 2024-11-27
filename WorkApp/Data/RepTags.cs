@@ -2,9 +2,9 @@
 
 namespace WorkApp.Data
 {
-    internal static class RepTags
+    public static class RepTags
     {
-        internal static string Replace(string template, string? value = null)
+        public static string Replace(string template, string? value = null)
         {
             StringBuilder sb = new StringBuilder(template);
 
